@@ -1,17 +1,21 @@
-import { WebPlugin } from '@capacitor/core';
-import { BarcodeReaderPluginPlugin } from './definitions';
+import { WebPlugin } from "@capacitor/core";
+import { BarcodeReaderPluginPlugin, BarcodeReaderResult } from "./definitions";
 
-export class BarcodeReaderPluginWeb extends WebPlugin implements BarcodeReaderPluginPlugin {
+export class BarcodeReaderPluginWeb extends WebPlugin
+  implements BarcodeReaderPluginPlugin {
   constructor() {
     super({
-      name: 'BarcodeReaderPlugin',
-      platforms: ['web']
+      name: "BarcodeReaderPlugin",
+      platforms: ["web"]
     });
   }
 
-  async echo(options: { value: string }): Promise<{value: string}> {
-    console.log('ECHO', options);
-    return options;
+  open(): Promise<BarcodeReaderResult> {
+    throw new Error("Method not implemented.");
+  }
+
+  close(): Promise<void> {
+    throw new Error("Method not implemented.");
   }
 }
 
@@ -19,5 +23,5 @@ const BarcodeReaderPlugin = new BarcodeReaderPluginWeb();
 
 export { BarcodeReaderPlugin };
 
-import { registerWebPlugin } from '@capacitor/core';
+import { registerWebPlugin } from "@capacitor/core";
 registerWebPlugin(BarcodeReaderPlugin);
